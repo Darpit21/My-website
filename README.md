@@ -74,11 +74,23 @@ Social profiles linked from the site: Instagram, Facebook, LinkedIn, and YouTube
 | `login.html` | The login and sign-up page. |
 | `support.js` | The runtime that renders both pages. It reads the `{{ ... }}` parts of the HTML and turns them into the finished page. Required — the site will not display without it. |
 | `image-slot.js` | A helper component for drag-and-drop image placeholders, loaded by the home page. |
-| `assets/` | The site's images: `logo.jpeg` (used in the header and footer of both pages), `akash-kashyap.jpeg`, and `raj-arpit.png` (team photos). |
+| `assets/` | The site's images — `logo.jpeg` (used in the header and footer of both pages), `akash-kashyap.jpeg` and `raj-arpit.png` (team photos) — plus the two React files below. |
+| `assets/react.production.min.js`<br>`assets/react-dom.production.min.js` | React 18.3.1, stored locally so the site does not depend on an outside CDN. Both pages load these just before `support.js`, which then uses them instead of downloading React from the internet. Do not remove or rename these, and keep them loading before `support.js`. |
 | `.nojekyll` | Only needed if the site is published with GitHub Pages — it stops GitHub stripping out the `{{ ... }}` code that `support.js` needs. It is harmless on Hostinger and other normal web hosts. |
 
-The pages need an internet connection to display, because `support.js` loads React from a
-public CDN (unpkg.com) when the page opens.
+### Outside connections
+
+Everything the site needs in order to work is stored in this folder, so the pages build
+and display without depending on any outside service.
+
+The pages do still load a few things from the internet, but these only affect appearance.
+If they are ever unavailable the site still works, just with fallback system fonts and
+missing decorative pictures:
+
+- **Google Fonts** — the Sora, Manrope and JetBrains Mono typefaces
+- **Unsplash** — the portfolio photographs
+- **jsDelivr, Simple Icons and unpkg (lucide-static)** — the small social, WhatsApp and
+  chat button icons
 
 ## How it was made
 
@@ -102,7 +114,8 @@ public CDN (unpkg.com) when the page opens.
    ```
 4. Upload the changed files to Hostinger, into the `public_html` folder (using the
    Hostinger File Manager, or FTP). Keep the same folder layout, so `index.html`,
-   `login.html`, `support.js`, `image-slot.js` and the `assets` folder all sit together.
+   `login.html`, `support.js`, `image-slot.js` and the whole `assets` folder (images and
+   React files together) all sit in the same place.
 5. Wait 1–2 minutes for the change to appear on the live domain.
 
 If you do not see the update, do a hard refresh in your browser (Cmd + Shift + R on Mac,

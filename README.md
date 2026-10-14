@@ -13,14 +13,14 @@ location — it works with businesses across Bihar and all over India.
 
 ## Live website
 
-https://darpit21.github.io/My-website/
+Coming soon on our company domain.
 
 ## Pages
 
 | Page | Description |
 | --- | --- |
-| **Home** (`Ankita Dgitech.dc.html`) | The main one-page site, with sections for About, Services, Courses, Why Choose Us, Portfolio, Testimonials, and Contact. Includes a light/dark theme switch and a contact form that sends the enquiry through WhatsApp. |
-| **Login** (`Login.dc.html`) | A sign-in and sign-up page for the Client & Student Portal, with two account types: Business Client and Course Student. |
+| **Home** (`index.html`) | The main one-page site, with sections for About, Services, Courses, Why Choose Us, Portfolio, Testimonials, and Contact. Includes a light/dark theme switch and a contact form that sends the enquiry through WhatsApp. |
+| **Login** (`login.html`) | A sign-in and sign-up page for the Client & Student Portal, with two account types: Business Client and Course Student. |
 
 Note: the Login page is currently front-end only. It checks that the password is at
 least 6 characters and then shows a confirmation message. There is no server behind it
@@ -70,22 +70,22 @@ Social profiles linked from the site: Instagram, Facebook, LinkedIn, and YouTube
 
 | File / folder | What it is |
 | --- | --- |
-| `index.html` | The home page entry point. GitHub Pages opens this first, and it redirects visitors to `Ankita Dgitech.dc.html`. |
-| `Ankita Dgitech.dc.html` | The main website page (all the content above). |
-| `Login.dc.html` | The login and sign-up page. |
+| `index.html` | The main website page (all the content above). This is the home page, and web servers open it automatically. |
+| `login.html` | The login and sign-up page. |
 | `support.js` | The runtime that renders both pages. It reads the `{{ ... }}` parts of the HTML and turns them into the finished page. Required — the site will not display without it. |
 | `image-slot.js` | A helper component for drag-and-drop image placeholders, loaded by the home page. |
 | `assets/` | The site's images: `logo.jpeg` (used in the header and footer of both pages), `akash-kashyap.jpeg`, and `raj-arpit.png` (team photos). |
-| `.nojekyll` | Tells GitHub Pages to publish the files exactly as they are. Without it, GitHub's Jekyll processor can strip out the `{{ ... }}` code that `support.js` needs, leaving a blank page. Do not delete this file. |
+| `.nojekyll` | Only needed if the site is published with GitHub Pages — it stops GitHub stripping out the `{{ ... }}` code that `support.js` needs. It is harmless on Hostinger and other normal web hosts. |
 
 The pages need an internet connection to display, because `support.js` loads React from a
 public CDN (unpkg.com) when the page opens.
 
 ## How it was made
 
-- **Designed with Claude Design**, which produced the `.dc.html` pages and the
+- **Designed with Claude Design**, which produced the two pages and the
   `support.js` / `image-slot.js` runtime files.
-- **Hosted on GitHub Pages**, served from the `main` branch, root (`/`) folder.
+- **Hosted on Hostinger**, on the company's own domain. This repository holds the master
+  copy of the files.
 
 ## How to update
 
@@ -96,12 +96,14 @@ public CDN (unpkg.com) when the page opens.
    git add -A
    git commit -m "Describe what you changed"
    ```
-3. Push to GitHub:
+3. Push to GitHub, so the repository keeps the latest copy:
    ```bash
    git push origin main
    ```
-4. Wait 1–2 minutes. GitHub Pages rebuilds automatically, and your changes appear at
-   https://darpit21.github.io/My-website/
+4. Upload the changed files to Hostinger, into the `public_html` folder (using the
+   Hostinger File Manager, or FTP). Keep the same folder layout, so `index.html`,
+   `login.html`, `support.js`, `image-slot.js` and the `assets` folder all sit together.
+5. Wait 1–2 minutes for the change to appear on the live domain.
 
 If you do not see the update, do a hard refresh in your browser (Cmd + Shift + R on Mac,
 Ctrl + Shift + R on Windows) to clear the cached old version.
@@ -110,9 +112,10 @@ Ctrl + Shift + R on Windows) to clear the cached old version.
 
 Put the image file in the `assets/` folder, then point to it from the page with a path
 like `assets/your-image.jpeg`. Keep the file name exactly the same as the one used in the
-HTML — GitHub Pages treats uppercase and lowercase as different.
+HTML — web servers treat uppercase and lowercase as different.
 
-### A note on links
+### A note on file names
 
-If you add a link to a file whose name contains a space, write the space as `%20`.
-For example, `Ankita Dgitech.dc.html` must be linked as `Ankita%20Dgitech.dc.html`.
+Keep file names in lowercase with no spaces, as they are now. This avoids broken links on
+the live server, since a space in a file name has to be written as `%20` in every link
+that points to it.
